@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <title>A-Frame Meshline Component - Basic</title>
+    <script src="../build.js"></script>
+  </head>
+  <body>
+    <a-scene> 
+    
+      <a-assets>
+        <a-mixin id="red" meshline="lineWidth: 30; color: #E20049"></a-mixin>
+      </a-assets>
+      
+      <a-entity geometry="primitive: circle; radius: 10; segments: 64" material="color: #F79F24" position="0 0 -12"></a-entity>
+      
+      <a-entity id="happy" position="0 2 -10">
+        <a-entity mixin="red" meshline="path: -1 1 0, -1 0.5 0, -1 0 0"></a-entity>
+        <a-entity mixin="red" meshline="path: 1 1 0, 1 0.5 0, 1 0 0"></a-entity>
+        <a-entity mixin="red" meshline="lineWidth: 20; path: -2 -1 0, 0 -2 0, 2 -1"></a-entity> 
+      </a-entity>
+      
+      <a-sky color="#FFEED0"></a-sky>
+    
+    </a-scene>
+  </body>
+</html>
