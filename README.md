@@ -1,6 +1,13 @@
-## aframe-example-component
+## aframe-meshline-component
 
-An example component for [A-Frame](https://aframe.io).
+A component for thick lines in [A-Frame](https://aframe.io).
+
+TODO:
+- README
+- examples
+- test?
+- awesome?
+- npm publish
 
 ### Properties
 
