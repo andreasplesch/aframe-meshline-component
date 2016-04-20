@@ -2,6 +2,10 @@
 
 A component for thick lines in [A-Frame](https://aframe.io).
 
+The component is based on the A-frame component tutorial.
+
+Here is the adapted [smiley face example](http://andreasplesch.github.io/aframe-pages/components/meshline)
+
 TODO:
 - README
 - examples
