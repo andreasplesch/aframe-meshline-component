@@ -31,6 +31,7 @@ The path, lineWidth and color properties do what you would expect. The lineWidth
 The lineWidthStyler property allows for defining the line width as a function of relative position p along the path of the line. By default it is set to a constant 1. The final, rendered width is scaled by lineWidth. You can use p in your function definition. It varies from 0 at the first vertex of the path to 1 at the last vertex of the path. Here are some examples:
 
 | lineWidthStyler value | effect |
+| --------------------- | ------ |
 | p | taper from nothing to lineWidth at the end |
 | 1 - p | taper from lineWidth to nothing at the end |
 | 1 - Math.abs(2 * p - 1) | taper to lineWidth at the center from both sides |
