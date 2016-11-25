@@ -109,15 +109,15 @@
 	  
 	    var canvas = this.el.sceneEl.canvas;
 	    this.resolution.set( canvas.width,  canvas.height );
-	    console.log( this.resolution );
+	    //console.log( this.resolution );
 	    this.update();
 
 	  },
 	  
 	  update: function () {
 	    //cannot use canvas here because it is not created yet at init time
-	    console.log("canvas res:");
-	    console.log(this.resolution);
+	    //console.log("canvas res:");
+	    //console.log(this.resolution);
 	    var material = new THREE.MeshLineMaterial({
 	      color: new THREE.Color(this.data.color),
 	      resolution: this.resolution,
