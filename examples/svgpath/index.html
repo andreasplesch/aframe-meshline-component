@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>A-Frame Meshline Component - SVG Path</title>
+    <script src="../build.js"></script>
+  </head>
+  <body>
+    <a-scene> 
+    
+      <a-assets>
+        <img src="stroke.png" id="strk" style="display:none"/>
+        <a-mixin id="red" meshline="lineWidth: 2;  color: #f00; texture: #strk"></a-mixin>
+      </a-assets>
+      
+      <!--
+      <a-entity geometry="primitive: circle; radius: 10; segments: 64" material="color: #F79F24" position="0 0 -12"></a-entity>
+      -->
+      <a-entity geometry="primitive: box;" material="wireframe:true; color: #F79F24"  position="0 0 -12"></a-entity>
+      
+      <a-entity id="happy" position="-5 0 -10" scale="0.1 0.1 1">
+        <a-entity mixin="red" meshline="svg: M0,18.84 c9.39,0, 14.33-2.46,        27.13-2.46,        19.75,0,30.38,11.91,77.13,10.46,0.67,0,3.08,0,5.76,0"></a-entity>
+        
+        <a-entity mixin="red" meshline="svg:M-0.25,9.84c9.39,0,14.33-2.46,27.13-2.46,19.75,0,30.38,11.91,77.13,10.46,1,0,6.27,0,10.19.08"></a-entity>
+        <a-entity mixin="red" meshline="lineWidth: 3;  svg: M0,20.05C9.39,20.05,14.33,27,27.13,27c13.71,0,26.54-16.1,40.25-16.1,14.5,0,23.79,10,36.88,10.14l9.69,0.11"></a-entity> 
+      </a-entity>
+      
+      <a-sky color="#fff"></a-sky>
+    
+    </a-scene>
+  </body>
+</html>
