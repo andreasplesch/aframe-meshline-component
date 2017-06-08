@@ -91,6 +91,7 @@ AFRAME.registerComponent('meshline', {
     var geometry = new THREE.Geometry();
     
     if (this.data.svg.length>0 ) {
+      geometry = svgPathToGeometry(svgRelativeCoordinatesToAbsolute(tokenizeSVGPathString(data.svg.trim())), {curveQuality: data.curveQuality});
     } else {
       this.data.path.forEach(function (vec3) {
         geometry.vertices.push(
