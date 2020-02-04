@@ -2,13 +2,19 @@ if (typeof AFRAME === 'undefined') {
     throw new Error('Component attempted to register before AFRAME was available.');
 }
 
-require('./lib/THREE.MeshLine');
+var ml = require('./lib/THREE.MeshLine');
+THREE.MeshLine = ml.MeshLine;
+THREE.MeshLineMaterial = ml.MeshLineMaterial;
+
 
 AFRAME.registerComponent('meshline', {
   schema: {
     color: { default: '#000' },
     lineWidth: { default: 10 },
     lineWidthStyler: { default: '1' },
+    sizeAttenuation: { default: 0 },
+    near: { default: 0.1 },
+    far: { default: 1000 },
     path: {
       default: [
         { x: -0.5, y: 0, z: 0 },
@@ -75,10 +81,10 @@ AFRAME.registerComponent('meshline', {
     var material = new THREE.MeshLineMaterial({
       color: new THREE.Color(this.data.color),
       resolution: this.resolution,
-      sizeAttenuation: false,
+      sizeAttenuation: this.data.sizeAttenuation,
       lineWidth: this.data.lineWidth,
-      //near: 0.1,
-      //far: 1000
+      near: this.data.near,
+      far: this.data.far
     });
   
     var geometry = new THREE.Geometry();
@@ -93,6 +99,7 @@ AFRAME.registerComponent('meshline', {
     //? try {var w = widthFn(0);} catch(e) {warn(e);}
     var line = new THREE.MeshLine();
     line.setGeometry( geometry, widthFn );
+    
     this.el.setObject3D('mesh', new THREE.Mesh(line.geometry, material));
   },
   
