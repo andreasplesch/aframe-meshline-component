@@ -11,7 +11,7 @@ AFRAME.registerComponent('meshline', {
   schema: {
     color: { default: '#000' },
     lineWidth: { default: 10 },
-    lineWidthStyler: { default: '1' },
+    lineWidthStyler: { default: null },
     sizeAttenuation: { default: 0 },
     near: { default: 0.1 },
     far: { default: 1000 },
@@ -95,7 +95,9 @@ AFRAME.registerComponent('meshline', {
       );
     });
     
-    var widthFn = new Function ('p', 'return ' + this.data.lineWidthStyler);
+    var widthFn = this.data.lineWidthStyler
+      ? new Function('p', 'return ' + this.data.lineWidthStyler)
+      : function() { return 1; };
     //? try {var w = widthFn(0);} catch(e) {warn(e);}
     var line = new THREE.MeshLine();
     line.setGeometry( geometry, widthFn );
