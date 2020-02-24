@@ -57,7 +57,7 @@
 	  schema: {
 	    color: { default: '#000' },
 	    lineWidth: { default: 10 },
-	    lineWidthStyler: { default: '1' },
+	    lineWidthStyler: { default: '' },
 	    sizeAttenuation: { default: 0 },
 	    near: { default: 0.1 },
 	    far: { default: 1000 },
@@ -141,7 +141,11 @@
 	      );
 	    });
 	    
-	    var widthFn = new Function ('p', 'return ' + this.data.lineWidthStyler);
+	    var widthFn = (
+	      typeof this.data.lineWidthStyler === 'string' &&
+	      this.data.lineWidthStyler.length > 0
+	    ) ? new Function('p', 'return ' + this.data.lineWidthStyler)
+	      : function() { return 1; };
 	    //? try {var w = widthFn(0);} catch(e) {warn(e);}
 	    var line = new THREE.MeshLine();
 	    line.setGeometry( geometry, widthFn );
@@ -951,7 +955,7 @@
 		 true ? factory(exports) :
 		typeof define === 'function' && define.amd ? define(['exports'], factory) :
 		(global = global || self, factory(global.THREE = {}));
-	}(this, function (exports) { 'use strict';
+	}(this, (function (exports) { 'use strict';
 
 		// Polyfills
 
@@ -24297,6 +24301,9 @@
 			cameraVR.layers.enable( 1 );
 			cameraVR.layers.enable( 2 );
 
+			var _currentDepthNear = null;
+			var _currentDepthFar = null;
+
 			//
 
 			this.enabled = false;
@@ -24461,6 +24468,20 @@
 			};
 
 			this.getCamera = function ( camera ) {
+
+				cameraVR.near = cameraR.near = cameraL.near = camera.near;
+				cameraVR.far = cameraR.far = cameraL.far = camera.far;
+				if ( _currentDepthNear !== cameraVR.near || _currentDepthFar !== cameraVR.far ) {
+
+					session.updateRenderState( {
+						depthNear: cameraVR.near,
+						depthFar: cameraVR.far
+					} );
+
+					_currentDepthNear = cameraVR.near;
+					_currentDepthFar = cameraVR.far;
+
+				}
 
 				var parent = camera.parent;
 				var cameras = cameraVR.cameras;
@@ -27166,7 +27187,7 @@
 
 			function materialNeedsLights( material ) {
 
-				return material.isMeshLambertMaterial || material.isMeshToonMaterial || material.isMeshPhongMaterial ||
+				return material.isMeshLambertMaterial || material.isMeshToonMaterial || material.isMeshPhongMaterial ||
 					material.isMeshStandardMaterial || material.isShadowMaterial ||
 					( material.isShaderMaterial && material.lights === true );
 
@@ -33772,6 +33793,7 @@
 
 
 		var Geometries = /*#__PURE__*/Object.freeze({
+			__proto__: null,
 			WireframeGeometry: WireframeGeometry,
 			ParametricGeometry: ParametricGeometry,
 			ParametricBufferGeometry: ParametricBufferGeometry,
@@ -34800,6 +34822,7 @@
 
 
 		var Materials = /*#__PURE__*/Object.freeze({
+			__proto__: null,
 			ShadowMaterial: ShadowMaterial,
 			SpriteMaterial: SpriteMaterial,
 			RawShaderMaterial: RawShaderMaterial,
@@ -39109,6 +39132,7 @@
 
 
 		var Curves = /*#__PURE__*/Object.freeze({
+			__proto__: null,
 			ArcCurve: ArcCurve,
 			CatmullRomCurve3: CatmullRomCurve3,
 			CubicBezierCurve: CubicBezierCurve,
@@ -51603,7 +51627,7 @@
 
 		Object.defineProperty(exports, '__esModule', { value: true });
 
-	}));
+	})));
 
 
 /***/ })
