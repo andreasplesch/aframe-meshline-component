@@ -95,8 +95,10 @@ AFRAME.registerComponent('meshline', {
       );
     });
     
-    var widthFn = this.data.lineWidthStyler && this.data.lineWidthStyler > 0
-      ? new Function('p', 'return ' + this.data.lineWidthStyler)
+    var widthFn = (
+      typeof this.data.lineWidthStyler === 'string' &&
+      this.data.lineWidthStyler.length > 0
+    ) ? new Function('p', 'return ' + this.data.lineWidthStyler)
       : function() { return 1; };
     //? try {var w = widthFn(0);} catch(e) {warn(e);}
     var line = new THREE.MeshLine();
