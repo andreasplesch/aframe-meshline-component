@@ -13,8 +13,6 @@ AFRAME.registerComponent('meshline', {
     lineWidth: { default: 10 },
     lineWidthStyler: { default: '' },
     sizeAttenuation: { default: 0 },
-    near: { default: 0.1 },
-    far: { default: 1000 },
     path: {
       default: [
         { x: -0.5, y: 0, z: 0 },
@@ -82,9 +80,7 @@ AFRAME.registerComponent('meshline', {
       color: new THREE.Color(this.data.color),
       resolution: this.resolution,
       sizeAttenuation: this.data.sizeAttenuation,
-      lineWidth: this.data.lineWidth,
-      near: this.data.near,
-      far: this.data.far
+      lineWidth: this.data.lineWidth
     });
   
     var vertices = [];
