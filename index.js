@@ -87,12 +87,10 @@ AFRAME.registerComponent('meshline', {
       far: this.data.far
     });
   
-    var geometry = new THREE.Geometry();
+    var vertices = [];
     
     this.data.path.forEach(function (vec3) {
-      geometry.vertices.push(
-        new THREE.Vector3(vec3.x, vec3.y, vec3.z)
-      );
+      vertices.push(vec3.x, vec3.y, vec3.z);
     });
     
     var widthFn = (
@@ -102,7 +100,7 @@ AFRAME.registerComponent('meshline', {
       : function() { return 1; };
     //? try {var w = widthFn(0);} catch(e) {warn(e);}
     var line = new THREE.MeshLine();
-    line.setGeometry( geometry, widthFn );
+    line.setGeometry(new Float32Array(vertices), widthFn);
     
     this.el.setObject3D('mesh', new THREE.Mesh(line.geometry, material));
   },
