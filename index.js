@@ -13,8 +13,6 @@ AFRAME.registerComponent('meshline', {
     lineWidth: { default: 10 },
     lineWidthStyler: { default: '' },
     sizeAttenuation: { default: 0 },
-    near: { default: 0.1 },
-    far: { default: 1000 },
     path: {
       default: [
         { x: -0.5, y: 0, z: 0 },
@@ -82,17 +80,13 @@ AFRAME.registerComponent('meshline', {
       color: new THREE.Color(this.data.color),
       resolution: this.resolution,
       sizeAttenuation: this.data.sizeAttenuation,
-      lineWidth: this.data.lineWidth,
-      near: this.data.near,
-      far: this.data.far
+      lineWidth: this.data.lineWidth
     });
   
-    var geometry = new THREE.Geometry();
+    var vertices = [];
     
     this.data.path.forEach(function (vec3) {
-      geometry.vertices.push(
-        new THREE.Vector3(vec3.x, vec3.y, vec3.z)
-      );
+      vertices.push(vec3.x, vec3.y, vec3.z);
     });
     
     var widthFn = (
@@ -102,7 +96,7 @@ AFRAME.registerComponent('meshline', {
       : function() { return 1; };
     //? try {var w = widthFn(0);} catch(e) {warn(e);}
     var line = new THREE.MeshLine();
-    line.setGeometry( geometry, widthFn );
+    line.setGeometry(new Float32Array(vertices), widthFn);
     
     this.el.setObject3D('mesh', new THREE.Mesh(line.geometry, material));
   },
