@@ -31,10 +31,11 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - run: rm -rf examples
       - run: npm install
+      - run: cat /home/runner/work/_temp/.npmrc
+      - run: npm login
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-      - run: cat /home/runner/work/_temp/.npmrc
       - run: cat /home/runner/.npm/_logs/*
 
 #   publish-gpr:
