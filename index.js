@@ -86,7 +86,7 @@ AFRAME.registerComponent('meshline', {
     var vertices = [];
     
     this.data.path.forEach(function (vec3) {
-      vertices.push(vec3.x, vec3.y, vec3.z);
+      vertices.push(vec3.x || 0, vec3.y || 0, vec3.z || 0);
     });
     
     var widthFn = (
