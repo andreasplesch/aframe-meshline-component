@@ -35,7 +35,7 @@ jobs:
       - run: npm whoami
       - run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          NODE_AUTH_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}
       - run: cat /home/runner/.npm/_logs/*
 
 #   publish-gpr:
