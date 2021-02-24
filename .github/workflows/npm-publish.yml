@@ -32,7 +32,7 @@ jobs:
       - run: rm -rf examples
       - run: npm install
       - run: cat /home/runner/work/_temp/.npmrc
-      - run: npm login
+      - run: npm whoami
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
