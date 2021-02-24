@@ -34,11 +34,10 @@ jobs:
       - run: cat /home/runner/work/_temp/.npmrc
 #       - run: npm login
 #       - run: npm whoami
-      - run: npm --verbose publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}
-      - run: cat /home/runner/.npm/_logs/*
-
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_PUBLISH_TOKEN }}
+       
 #   publish-gpr:
 #     needs: build
 #     runs-on: ubuntu-latest
