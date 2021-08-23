@@ -162,9 +162,9 @@
 
 	  var root = this
 
-	  var has_require = "function" !== 'undefined'
+	  //var has_require = typeof require !== 'undefined'
 
-	  var THREE = root.THREE //|| (has_require && require('super-three'))
+	  var THREE = AFRAME.THREE //|| (has_require && require('super-three'))
 	  if (!THREE) throw new Error('MeshLine requires three.js')
 
 	  function MeshLine() {
