@@ -1,6 +1,6 @@
 {
   "name": "aframe-meshline-component",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "thick line component for A-frame based on THREE.meshline.",
   "main": "index.js",
   "scripts": {
